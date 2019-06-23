@@ -1787,8 +1787,25 @@ c**** transfer parton information to hadronization****
 		   
 		   mul = njlmul(ixj)  !importrant  number of partons
            call ptoh
+         print *,"hadron resample begin, events=",ixj		   
+		    do I=1,NATT
+			
+			  
+              ITY=ITYpar(I)
+			  
+              gxq = gxar(I)
+			  
+              gyq = gyar(I)
+              gzq = gzar(I)			  
+              call HadReSamp(ixj,ity,gxq,gyq,gzq)
+              gxar(I) = gxq
+              gyar(I)= gyq
+              gzar(I) = gzq	  
 
-              call HadReSamp(ixj,NATT)
+           enddo
+
+         print *,"hadron resample done!, events=",ixj			   
+		   
 
 		    NATTXJ(ixj) = NATT
 		    do I=1,NATT

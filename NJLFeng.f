@@ -110,14 +110,10 @@ c      COMMON /PARA1/ MUL
 
 
 
-       subroutine HadReSamp(npara0,numhad)
+       subroutine HadReSamp(npara0,ity,gx,gy,gz)
         PARAMETER (MAXSTR=150001,MAXSTR1=10000)
       PARAMETER (MAXPTN=40001,MAXR=1000)
-      implicit real*8 (a-h,o-z)
-        COMMON /ARPRC/ ITYPAR(MAXSTR),
-     &       GXAR(MAXSTR), GYAR(MAXSTR), GZAR(MAXSTR), FTAR(MAXSTR),
-     &       PXAR(MAXSTR), PYAR(MAXSTR), PZAR(MAXSTR), PEAR(MAXSTR),
-     &       XMAR(MAXSTR)		  
+      implicit real*8 (a-h,o-z)		  
       COMMON /precnjl/GXnjl(MAXPTN,MAXR),GYnjl(MAXPTN,MAXR)
      &,GZnjl(MAXPTN,MAXR),FTnjl(MAXPTN,MAXR)
      &,PXnjl(MAXPTN,MAXR), PYnjl(MAXPTN,MAXR), PZnjl(MAXPTN,MAXR)
@@ -173,10 +169,9 @@ c      COMMON /PARA1/ MUL
 	   !ITYPnjl(i,npara) = int(ispc)
 	   enddo
        enddo
-        print *,"hadron resample begin, events=",npara0  
-        do I=1, numhad
-         !print *, I
-              ITY=ITYpar(I)
+	   
+        !print *,"hadron resample begin, events=",npara0  
+
               Is = 0
               if (abs(ity).eq.2112)then
                Is=1
@@ -184,35 +179,33 @@ c      COMMON /PARA1/ MUL
 				 k = int( r*float(numqd) )+1
                   if (k.gt.numqd)k=numqd
                   !print *,r,k,numqd
-                 gx = gxd(k)
-                 gy = gyd(k)
-                 gz = gzd(k)
-                 ft = ftd(k)
+                 gx1 = gxd(k)
+                 gy1 = gyd(k)
+                 gz1 = gzd(k)
+                 !ft = ftd(k)
                elseif  (abs(ity).eq.2212)then
                Is=1
 			   
                  r = rand()
 				 k = int( r*float(numqu) )+1
                   if (k.gt.numqu)k=numqu
-                 gx = gxu(k)
-                 gy = gyu(k)
-                 gz = gzu(k)
+                 gx1 = gxu(k)
+                 gy1 = gyu(k)
+                 gz1 = gzu(k)
                  !ft = ftu(k)
 				 
               endif
+			  
               if (Is.eq.1)then
 
-              print *,"before:",I,gxar(I),gyar(I),gzar(I),ftar(I)
-              print *,"before:",I,pxar(I),pyar(I),pzar(I),itypar(I)			  
-              gxar(I)=gx
-              gyar(I)=gy
-              gzar(I)=gz
+              print *,"before:",gx,gy,gz               
+              gx=gx1
+              gy=gy1
+              gz=gz1
               !ftar(I)=ft
               print *, "after:",gx,gy,gz
               endif
-    
-        enddo	
-
-        print *,"hadron resample done!, events=",npara0		   
+			  
+         !print *,"hadron resample done!, events=",npara0		   
         RETURN
         END			
