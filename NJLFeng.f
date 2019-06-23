@@ -197,14 +197,16 @@ c      COMMON /PARA1/ MUL
                  gx = gxu(k)
                  gy = gyu(k)
                  gz = gzu(k)
-                 ft = ftu(k)
+                 !ft = ftu(k)
 				 
               endif
               if (Is.eq.1)then
               gxar(I)=gx
               gyar(I)=gy
               gzar(I)=gz
-              ftar(I)=ft
+              !ftar(I)=ft
+              print *,"before:",gxar(I),gyar(I),gzar(I)
+              print *, "after:",gx,gy,gz
               endif
     
         enddo	
