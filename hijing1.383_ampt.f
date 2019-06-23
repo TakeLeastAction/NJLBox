@@ -1788,7 +1788,7 @@ c**** transfer parton information to hadronization****
 		   mul = njlmul(ixj)  !importrant  number of partons
            call ptoh
 
-              call HadReSamp
+              call HadReSamp(ixj,NATT)
 
 		    NATTXJ(ixj) = NATT
 		    do I=1,NATT

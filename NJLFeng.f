@@ -84,7 +84,7 @@ c      COMMON /PARA1/ MUL
 		
 	  do npara=1, nevent
 
-          read(99,*) iev, i2, ipart, r1, i4, i5, i6, i7	  	 
+          read(99,*) iev, i2, ipart, r1, i4, i5, i6, i7,i8  	 
        !write(*,*)"data back:",nevent,npara,ipart		  
 	  do i=1,ipart !NJLMUL(npara)
           read(99,*) qx, qy, qz, ispc, xmass, xx, yy, zz, time	
@@ -106,3 +106,106 @@ c      COMMON /PARA1/ MUL
        enddo
         RETURN
         END	 
+		
+
+
+
+       subroutine HadReSamp(npara0,numhad)
+      PARAMETER (MAXPTN=40001,MAXR=1000)
+        PARAMETER (MAXSTR=150001)
+      implicit real*8 (a-h,o-z)
+      COMMON /precnjl/GXnjl(MAXPTN,MAXR),GYnjl(MAXPTN,MAXR)
+     &,GZnjl(MAXPTN,MAXR),FTnjl(MAXPTN,MAXR)
+     &,PXnjl(MAXPTN,MAXR), PYnjl(MAXPTN,MAXR), PZnjl(MAXPTN,MAXR)
+     &,Enjl(MAXPTN,MAXR),XMASSnjl(MAXPTN,MAXR), ITYPnjl(MAXPTN,MAXR)
+        COMMON /ARPRC/ ITYPAR(MAXSTR),
+     &       GXAR(MAXSTR), GYAR(MAXSTR), GZAR(MAXSTR), FTAR(MAXSTR),
+     &       PXAR(MAXSTR), PYAR(MAXSTR), PZAR(MAXSTR), PEAR(MAXSTR),
+     &       XMAR(MAXSTR)	 
+        common /tmpquark/ ITYu(MAXSTR),
+     &       GXu(MAXSTR), GYu(MAXSTR), GZu(MAXSTR), FTu(MAXSTR),
+     &       PXu(MAXSTR), PYu(MAXSTR), PZu(MAXSTR), PEu(MAXSTR),
+     &       XMu(MAXSTR),ITYd(MAXSTR),
+     &       GXd(MAXSTR), GYd(MAXSTR), GZd(MAXSTR), FTd(MAXSTR),
+     &       PXd(MAXSTR), PYd(MAXSTR), PZd(MAXSTR), PEd(MAXSTR),
+     &       XMd(MAXSTR)
+      COMMON /NJLMUL/ NJLMUL(MAXR)	 
+        !open (unit=99, file='zpcBW.dat', status='unknown')	  
+        !open(unit=106, file='NJLEVE.dat', status='unknown')	
+        !read(106,*)nevent
+		
+		
+	
+       numqu = 0
+       numqd = 0
+	  do npara=npara0, npara0	  
+	  do i=1,NJLMUL(npara)	 
+         ity = ITYPnjl(i,npara) 
+          if (ity.eq.1)then
+              numqd=numqd+1
+			  
+              Gxd(numqd) = GXnjl(i,npara)
+              Gyd(numqd) = Gynjl(i,npara)
+              Gzd(numqd) = Gznjl(i,npara)
+              ftd(numqd) = ftnjl(i,npara)			  
+           endif
+
+          if (ity.eq.2)then
+              numqu=numqu+1
+			  
+              Gxu(numqu) = GXnjl(i,npara)
+              Gyu(numqu) = Gynjl(i,npara)
+              Gzu(numqu) = Gznjl(i,npara)
+              ftu(numqu) = ftnjl(i,npara)			  
+           endif		   
+		   
+	    !GXnjl(i,npara) = xx
+	   !GYnjl(i,npara) = yy
+	   !GZnjl(i,npara) = zz
+        !   FTnjl(i,npara) = time
+	   !PXnjl(i,npara) = qx
+	   !PYnjl(i,npara) = qy
+	    !PZnjl(i,npara) = qz
+	   !XMASSnjl(i,npara) = xmass
+	   !Enjl(i,npara) = Eqs
+	
+       !write(*,*)"data back:",xx,yy,zz,time,xmass,Eqs	   
+	   !ITYPnjl(i,npara) = int(ispc)
+	   enddo
+       enddo
+	   
+        do I=1, numhad
+		
+              ITY=ITYpar(I)
+              Is = 0
+              if (abs(ity).eq.2112)then
+               Is=1
+                 r = rand()
+				 k = floor( r*float(numqd) )
+                 gx = gxd(k)
+                 gy = gyd(k)
+                 gz = gzd(k)
+                 ft = ftd(k)
+               elseif  (abs(ity).eq.2212)then
+               Is=1
+			   
+                 r = rand()
+				 k = floor( r*float(numqu) )
+                 gx = gxu(k)
+                 gy = gyu(k)
+                 gz = gzu(k)
+                 ft = ftu(k)
+				 
+              endif
+              if (Is.eq.1)then
+              gxar(I)=gx
+              gyar(I)=gy
+              gzar(I)=gz
+              ftar(I)=ft
+              endif
+    
+        enddo	
+
+	   
+        RETURN
+        END			
