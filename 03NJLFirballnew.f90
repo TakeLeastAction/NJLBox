@@ -2370,7 +2370,7 @@
 		
 	subroutine xBound(x,nx,ny,nz,Boundx)
 	implicit real*8 (a-h,o-z)
-	integer,parameter :: Ngx = 21, Ngy = 21, Ngz = 21  
+	integer,parameter :: Ngx = 31, Ngy = 31, Ngz = 31  
 	dimension x(Ngx,Ngy,Ngz),Boundx(Ngx+2,Ngy+2,Ngz+2)
 	do ii=1, nx
 	   do jj=1, ny
