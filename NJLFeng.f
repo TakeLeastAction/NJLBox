@@ -111,8 +111,8 @@ c      COMMON /PARA1/ MUL
 
 
        subroutine HadReSamp(npara0,numhad)
-      PARAMETER (MAXPTN=40001,MAXR=1000)
         PARAMETER (MAXSTR=150001,MAXSTR1=10000)
+      PARAMETER (MAXPTN=40001,MAXR=1000)
       implicit real*8 (a-h,o-z)
         COMMON /ARPRC/ ITYPAR(MAXSTR),
      &       GXAR(MAXSTR), GYAR(MAXSTR), GZAR(MAXSTR), FTAR(MAXSTR),
@@ -201,11 +201,12 @@ c      COMMON /PARA1/ MUL
 				 
               endif
               if (Is.eq.1)then
+
+              print *,"before:",gxar(I),gyar(I),gzar(I)			  
               gxar(I)=gx
               gyar(I)=gy
               gzar(I)=gz
               !ftar(I)=ft
-              print *,"before:",gxar(I),gyar(I),gzar(I)
               print *, "after:",gx,gy,gz
               endif
     
