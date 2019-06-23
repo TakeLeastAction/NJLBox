@@ -114,14 +114,14 @@ c      COMMON /PARA1/ MUL
       PARAMETER (MAXPTN=40001,MAXR=1000)
         PARAMETER (MAXSTR=150001)
       implicit real*8 (a-h,o-z)
-      COMMON /precnjl/GXnjl(MAXPTN,MAXR),GYnjl(MAXPTN,MAXR)
-     &,GZnjl(MAXPTN,MAXR),FTnjl(MAXPTN,MAXR)
-     &,PXnjl(MAXPTN,MAXR), PYnjl(MAXPTN,MAXR), PZnjl(MAXPTN,MAXR)
-     &,Enjl(MAXPTN,MAXR),XMASSnjl(MAXPTN,MAXR), ITYPnjl(MAXPTN,MAXR)
         COMMON /ARPRC/ ITYPAR(MAXSTR),
      &       GXAR(MAXSTR), GYAR(MAXSTR), GZAR(MAXSTR), FTAR(MAXSTR),
      &       PXAR(MAXSTR), PYAR(MAXSTR), PZAR(MAXSTR), PEAR(MAXSTR),
-     &       XMAR(MAXSTR)	 
+     &       XMAR(MAXSTR)		  
+      COMMON /precnjl/GXnjl(MAXPTN,MAXR),GYnjl(MAXPTN,MAXR)
+     &,GZnjl(MAXPTN,MAXR),FTnjl(MAXPTN,MAXR)
+     &,PXnjl(MAXPTN,MAXR), PYnjl(MAXPTN,MAXR), PZnjl(MAXPTN,MAXR)
+     &,Enjl(MAXPTN,MAXR),XMASSnjl(MAXPTN,MAXR), ITYPnjl(MAXPTN,MAXR) 
         common /tmpquark/ ITYu(MAXSTR),
      &       GXu(MAXSTR), GYu(MAXSTR), GZu(MAXSTR), FTu(MAXSTR),
      &       PXu(MAXSTR), PYu(MAXSTR), PZu(MAXSTR), PEu(MAXSTR),
@@ -173,15 +173,16 @@ c      COMMON /PARA1/ MUL
 	   !ITYPnjl(i,npara) = int(ispc)
 	   enddo
        enddo
-	   
+        print *,"hadron resample begin"	   
         do I=1, numhad
-		
+         print *, I
               ITY=ITYpar(I)
               Is = 0
               if (abs(ity).eq.2112)then
                Is=1
                  r = rand()
-				 k = floor( r*float(numqd) )+1
+				 k = int( r*float(numqd) )+1
+                  print *,r,k,numqd
                  gx = gxd(k)
                  gy = gyd(k)
                  gz = gzd(k)
@@ -190,7 +191,7 @@ c      COMMON /PARA1/ MUL
                Is=1
 			   
                  r = rand()
-				 k = floor( r*float(numqu) )+1
+				 k = int( r*float(numqu) )+1
                  gx = gxu(k)
                  gy = gyu(k)
                  gz = gzu(k)
