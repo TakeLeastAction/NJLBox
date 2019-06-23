@@ -136,8 +136,8 @@ c      COMMON /PARA1/ MUL
        numqd = 0
 	  do npara=npara0, npara0	  
 	  do i=1,NJLMUL(npara)	 
-         ity = ITYPnjl(i,npara) 
-          if (ity.eq.1)then
+         ityq = ITYPnjl(i,npara) 
+          if (ityq.eq.1)then
               numqd=numqd+1
 			  
               Gxd(numqd) = GXnjl(i,npara)
@@ -146,7 +146,7 @@ c      COMMON /PARA1/ MUL
               ftd(numqd) = ftnjl(i,npara)			  
            endif
 
-          if (ity.eq.2)then
+          if (ityq.eq.2)then
               numqu=numqu+1
 			  
               Gxu(numqu) = GXnjl(i,npara)

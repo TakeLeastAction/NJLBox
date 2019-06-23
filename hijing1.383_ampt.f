@@ -1797,9 +1797,9 @@ c**** transfer parton information to hadronization****
 			  
               gyq = gyar(I)
               gzq = gzar(I)		
-              print *, ixj,ity,gxq,gyq,gzq		  
+              !print *, ixj,ity,gxq,gyq,gzq		  
               call HadReSamp(ixj,ity,gxq,gyq,gzq)
-              print *, ixj,ity,gxq,gyq,gzq				  
+              !print *, ixj,ity,gxq,gyq,gzq				  
               gxar(I) = gxq
               gyar(I)= gyq
               gzar(I) = gzq	  
