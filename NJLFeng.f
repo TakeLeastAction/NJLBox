@@ -112,7 +112,7 @@ c      COMMON /PARA1/ MUL
 
        subroutine HadReSamp(npara0,numhad)
       PARAMETER (MAXPTN=40001,MAXR=1000)
-        PARAMETER (MAXSTR=150001)
+        PARAMETER (MAXSTR=150001,MAXSTR1=10000)
       implicit real*8 (a-h,o-z)
         COMMON /ARPRC/ ITYPAR(MAXSTR),
      &       GXAR(MAXSTR), GYAR(MAXSTR), GZAR(MAXSTR), FTAR(MAXSTR),
@@ -122,13 +122,13 @@ c      COMMON /PARA1/ MUL
      &,GZnjl(MAXPTN,MAXR),FTnjl(MAXPTN,MAXR)
      &,PXnjl(MAXPTN,MAXR), PYnjl(MAXPTN,MAXR), PZnjl(MAXPTN,MAXR)
      &,Enjl(MAXPTN,MAXR),XMASSnjl(MAXPTN,MAXR), ITYPnjl(MAXPTN,MAXR) 
-        common /tmpquark/ ITYu(MAXSTR),
-     &       GXu(MAXSTR), GYu(MAXSTR), GZu(MAXSTR), FTu(MAXSTR),
-     &       PXu(MAXSTR), PYu(MAXSTR), PZu(MAXSTR), PEu(MAXSTR),
-     &       XMu(MAXSTR),ITYd(MAXSTR),
-     &       GXd(MAXSTR), GYd(MAXSTR), GZd(MAXSTR), FTd(MAXSTR),
-     &       PXd(MAXSTR), PYd(MAXSTR), PZd(MAXSTR), PEd(MAXSTR),
-     &       XMd(MAXSTR)
+        common /tmpquark/ ITYu(MAXSTR1),
+     &       GXu(MAXSTR1), GYu(MAXSTR1), GZu(MAXSTR1), FTu(MAXSTR1),
+     &       PXu(MAXSTR1), PYu(MAXSTR1), PZu(MAXSTR1), PEu(MAXSTR1),
+     &       XMu(MAXSTR1),ITYd(MAXSTR1),
+     &       GXd(MAXSTR1), GYd(MAXSTR1), GZd(MAXSTR1), FTd(MAXSTR1),
+     &       PXd(MAXSTR1), PYd(MAXSTR1), PZd(MAXSTR1), PEd(MAXSTR1),
+     &       XMd(MAXSTR1)
       COMMON /NJLMUL/ NJLMUL(MAXR)	 
         !open (unit=99, file='zpcBW.dat', status='unknown')	  
         !open(unit=106, file='NJLEVE.dat', status='unknown')	
@@ -173,16 +173,17 @@ c      COMMON /PARA1/ MUL
 	   !ITYPnjl(i,npara) = int(ispc)
 	   enddo
        enddo
-        print *,"hadron resample begin"	   
+        print *,"hadron resample begin, events=",npara0  
         do I=1, numhad
-         print *, I
+         !print *, I
               ITY=ITYpar(I)
               Is = 0
               if (abs(ity).eq.2112)then
                Is=1
                  r = rand()
 				 k = int( r*float(numqd) )+1
-                  print *,r,k,numqd
+                  if (k.gt.numqd)k=numqd
+                  !print *,r,k,numqd
                  gx = gxd(k)
                  gy = gyd(k)
                  gz = gzd(k)
@@ -192,6 +193,7 @@ c      COMMON /PARA1/ MUL
 			   
                  r = rand()
 				 k = int( r*float(numqu) )+1
+                  if (k.gt.numqu)k=numqu
                  gx = gxu(k)
                  gy = gyu(k)
                  gz = gzu(k)
@@ -207,6 +209,6 @@ c      COMMON /PARA1/ MUL
     
         enddo	
 
-	   
+        print *,"hadron resample done!, events=",npara0		   
         RETURN
         END			
