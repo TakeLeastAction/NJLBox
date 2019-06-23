@@ -181,7 +181,7 @@ c      COMMON /PARA1/ MUL
               if (abs(ity).eq.2112)then
                Is=1
                  r = rand()
-				 k = floor( r*float(numqd) )
+				 k = floor( r*float(numqd) )+1
                  gx = gxd(k)
                  gy = gyd(k)
                  gz = gzd(k)
@@ -190,7 +190,7 @@ c      COMMON /PARA1/ MUL
                Is=1
 			   
                  r = rand()
-				 k = floor( r*float(numqu) )
+				 k = floor( r*float(numqu) )+1
                  gx = gxu(k)
                  gy = gyu(k)
                  gz = gzu(k)
