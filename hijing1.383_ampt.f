@@ -1803,9 +1803,9 @@ c**** transfer parton information to hadronization****
               pearxj(I,ixj)=pear(I)
               xmarxj(I,ixj)=xmar(I)
 clin-2/2017 this may cause no particle record in ampt.dat for the event:
-c         if(FTar(I).le.0) write(*,*) 'hijin,ERROR:FT0<=0',I,FTar(I) 
-c     1 ,ITYPar(I),GXar(I),GYar(I),GZar(I),PXar(I)
-c	 2 ,PYar(I),PZar(I),XMar(I)			  
+         if(FTar(I).le.0) write(*,*) 'hijin,ERROR:FT0<=0',I,FTar(I) 
+     1 ,ITYPar(I),GXar(I),GYar(I),GZar(I),PXar(I)
+	 2 ,PYar(I),PZar(I),XMar(I)			  
 
            enddo
 		   

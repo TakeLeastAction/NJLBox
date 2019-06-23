@@ -202,7 +202,8 @@ c      COMMON /PARA1/ MUL
               endif
               if (Is.eq.1)then
 
-              print *,"before:",gxar(I),gyar(I),gzar(I)			  
+              print *,"before:",I,gxar(I),gyar(I),gzar(I),ftar(I)
+              print *,"before:",I,pxar(I),pyar(I),pzar(I),itypar(I)			  
               gxar(I)=gx
               gyar(I)=gy
               gzar(I)=gz
