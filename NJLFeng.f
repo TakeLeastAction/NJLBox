@@ -126,12 +126,12 @@ c      COMMON /PARA1/ MUL
      &       PXd(MAXSTR1), PYd(MAXSTR1), PZd(MAXSTR1), PEd(MAXSTR1),
      &       XMd(MAXSTR1)
       COMMON /NJLMUL/ NJLMUL(MAXR)	 
-      common /kjquark/kjgx,kjgy,kjgz
+      common /quarkkj/gxkj,gykj,gzkj
         !open (unit=99, file='zpcBW.dat', status='unknown')	  
         !open(unit=106, file='NJLEVE.dat', status='unknown')	
         !read(106,*)nevent
 		
-              print *,"HadReSamp input:",npara0,ity,gx,gy,gz  		
+              print *,"HadReSamp input:",npara0,ity,gxkj,gykj,gzkj  		
 	
        numqu = 0
        numqd = 0
@@ -168,9 +168,9 @@ c      COMMON /PARA1/ MUL
 				 k = int( r*float(numqd) )+1
                   if (k.gt.numqd)k=numqd
                  print *,r,k,numqd,gxd(k),gyd(k),gzd(k)
-                 kjgx = gxd(k)
-                 kjgy = gyd(k)
-                 kjgz = gzd(k)
+                 gxkj = gxd(k)
+                 gykj = gyd(k)
+                 gzkj = gzd(k)
                  !ft = ftd(k)
                elseif  (abs(ity).eq.2212)then
                Is=1
@@ -179,9 +179,9 @@ c      COMMON /PARA1/ MUL
 				 k = int( r*float(numqu) )+1
                   if (k.gt.numqu)k=numqu
                   print *,r,k,numqu,gxu(k),gyu(k),gzu(k)
-                 kjgx = gxu(k)
-                 kjgy = gyu(k)
-                 kjgz = gzu(k)
+                 gxkj = gxu(k)
+                 gykj = gyu(k)
+                 gzkj = gzu(k)
                  !ft = ftu(k)
 				 
               endif

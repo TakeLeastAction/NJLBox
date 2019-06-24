@@ -366,7 +366,7 @@ clin-parentString:
         COMMON /RUN/ NUM !XJ: TEST PARTICLES 
 
 	 
-      common /kjquark/kjgx,kjgy,kjgz
+      common /quarkkj/gxkj,gykj,gzkj
 		
         SAVE   
 
@@ -1801,12 +1801,12 @@ c**** transfer parton information to hadronization****
 			  
               kjgy = gyar(I)
               kjgz = gzar(I)		
-              print *, ixj,ity,kjgx,kjgy,kjgz		  
+              print *, ixj,ity,gxkj,gykj,gzkj		  
               call HadReSamp(ixj,ity)
-              print *, ixj,ity,kjgx,kjgy,kjgz				  
-              gxar(I) = kjgx
-              gyar(I)= kjgy
-              gzar(I) = kjgz	  
+              print *, ixj,ity,gxkj,gykj,gzkj				  
+              gxar(I) = gxkj
+              gyar(I)= gykj
+              gzar(I) = gzkj	  
 
            enddo
 
