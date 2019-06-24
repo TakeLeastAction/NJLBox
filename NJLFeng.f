@@ -110,7 +110,7 @@ c      COMMON /PARA1/ MUL
 
 
 
-       subroutine HadReSamp(npara0,ity,gx,gy,gz)
+       subroutine HadReSamp(npara0,ity)
         PARAMETER (MAXSTR=150001,MAXSTR1=10000)
       PARAMETER (MAXPTN=40001,MAXR=1000)
       implicit real*8 (a-h,o-z)		  
@@ -126,6 +126,7 @@ c      COMMON /PARA1/ MUL
      &       PXd(MAXSTR1), PYd(MAXSTR1), PZd(MAXSTR1), PEd(MAXSTR1),
      &       XMd(MAXSTR1)
       COMMON /NJLMUL/ NJLMUL(MAXR)	 
+      common /kjquark/kjgx,kjgy,kjgz
         !open (unit=99, file='zpcBW.dat', status='unknown')	  
         !open(unit=106, file='NJLEVE.dat', status='unknown')	
         !read(106,*)nevent
@@ -167,9 +168,9 @@ c      COMMON /PARA1/ MUL
 				 k = int( r*float(numqd) )+1
                   if (k.gt.numqd)k=numqd
                  print *,r,k,numqd,gxd(k),gyd(k),gzd(k)
-                 gx1 = gxd(k)
-                 gy1 = gyd(k)
-                 gz1 = gzd(k)
+                 kjgx = gxd(k)
+                 kjgy = gyd(k)
+                 kjgz = gzd(k)
                  !ft = ftd(k)
                elseif  (abs(ity).eq.2212)then
                Is=1
@@ -178,22 +179,22 @@ c      COMMON /PARA1/ MUL
 				 k = int( r*float(numqu) )+1
                   if (k.gt.numqu)k=numqu
                   print *,r,k,numqu,gxu(k),gyu(k),gzu(k)
-                 gx1 = gxu(k)
-                 gy1 = gyu(k)
-                 gz1 = gzu(k)
+                 kjgx = gxu(k)
+                 kjgy = gyu(k)
+                 kjgz = gzu(k)
                  !ft = ftu(k)
 				 
               endif
 			  
-              if (Is.eq.1)then
+              !if (Is.eq.1)then
 
-              print *,"before:",gx,gy,gz               
-              gx=gx1
-              gy=gy1
-              gz=gz1
+              !print *,"before:",gx,gy,gz               
+              !gx=gx1
+              !gy=gy1
+              !gz=gz1
               !ftar(I)=ft
-              print *, "after:",gx,gy,gz
-              endif
+              !print *, "after:",gx,gy,gz
+              !endif
 			  
          !print *,"hadron resample done!, events=",npara0		   
         RETURN

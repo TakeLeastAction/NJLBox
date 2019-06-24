@@ -364,6 +364,10 @@ clin-parentString:
      1       xstrg0(MAXPTN),ystrg0(MAXPTN),
      2       xstrg(MAXPTN),ystrg(MAXPTN),istrg0(MAXPTN),istrg(MAXPTN)
         COMMON /RUN/ NUM !XJ: TEST PARTICLES 
+
+	 
+      common /kjquark/kjgx,kjgy,kjgz
+		
         SAVE   
 
         !XJ: TEST PARTICLES FOR PARTONIC PHASE
@@ -1793,16 +1797,16 @@ c**** transfer parton information to hadronization****
 			  
               ITY=ITYpar(I)
 			  
-              gxq = gxar(I)
+              kjgx = gxar(I)
 			  
-              gyq = gyar(I)
-              gzq = gzar(I)		
-              print *, ixj,ity,gxq,gyq,gzq		  
-              call HadReSamp(ixj,ity,gxq,gyq,gzq)
-              print *, ixj,ity,gxq,gyq,gzq				  
-              gxar(I) = gxq
-              gyar(I)= gyq
-              gzar(I) = gzq	  
+              kjgy = gyar(I)
+              kjgz = gzar(I)		
+              print *, ixj,ity,kjgx,kjgy,kjgz		  
+              call HadReSamp(ixj,ity)
+              print *, ixj,ity,kjgx,kjgy,kjgz				  
+              gxar(I) = kjgx
+              gyar(I)= kjgy
+              gzar(I) = kjgz	  
 
            enddo
 
