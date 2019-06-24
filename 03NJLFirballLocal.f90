@@ -86,6 +86,9 @@
 !******************************* saving ***************************************  
     open (unit=17, file='uni_ball_small.dat', status='unknown')                                         !changed by sunkj  
     open (unit=100, file='zpcBW.dat', status='unknown')    !------------------------------- Final state quark information   
+
+    open (unit=120, file='zpcLocalBW.dat', status='unknown')    !------------------------------- Final state quark information   
+
     open (unit=108, file='zpc_Freeze.dat', status='unknown')    !------------------------------- Freeze-out data    
     open (unit=109, file='zpc_Freeze_Ed.dat', status='unknown')    !------------------------------- Freeze-out data       
     open (unit=101, file='ana/central_NJL.dat',status='unknown') !------------------------------- Central cell evolution 
@@ -2288,11 +2291,14 @@
   
 	do npara=1, nevent
        write(100,49) 1,1, ipart(npara) , 0.0, 1, 1, 1, 1,1
+       write(120,49) 1,1, ipart(npara) , 0.0, 1, 1, 1, 1,1	   
 	   do i=1, ipart(npara)
 
           write(100,2013) q(5,i,npara),q(6,i,npara),q(7,i,npara),&
           int(q(9,i,npara)),q(8,i,npara),q(1,i,npara),q(2,i,npara),q(3,i,npara), t 
 
+		            write(120,2013) qq(5,i,npara),qq(6,i,npara),qq(7,i,npara),&
+          int(qq(9,i,npara)),qq(8,i,npara),qq(1,i,npara),qq(2,i,npara),qq(3,i,npara),qq(4,i,npara)
 	   
 	   enddo
     enddo
