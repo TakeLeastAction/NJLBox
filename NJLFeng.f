@@ -130,7 +130,7 @@ c      COMMON /PARA1/ MUL
         !open(unit=106, file='NJLEVE.dat', status='unknown')	
         !read(106,*)nevent
 		
-		
+              print *,"HadReSamp input:",npara0,ity,gx,gy,gz  		
 	
        numqu = 0
        numqd = 0
@@ -155,18 +155,6 @@ c      COMMON /PARA1/ MUL
               ftu(numqu) = ftnjl(i,npara)			  
            endif		   
 		   
-	    !GXnjl(i,npara) = xx
-	   !GYnjl(i,npara) = yy
-	   !GZnjl(i,npara) = zz
-        !   FTnjl(i,npara) = time
-	   !PXnjl(i,npara) = qx
-	   !PYnjl(i,npara) = qy
-	    !PZnjl(i,npara) = qz
-	   !XMASSnjl(i,npara) = xmass
-	   !Enjl(i,npara) = Eqs
-	
-       !write(*,*)"data back:",xx,yy,zz,time,xmass,Eqs	   
-	   !ITYPnjl(i,npara) = int(ispc)
 	   enddo
        enddo
 	   
@@ -178,7 +166,7 @@ c      COMMON /PARA1/ MUL
                  r = rand()
 				 k = int( r*float(numqd) )+1
                   if (k.gt.numqd)k=numqd
-                  !print *,r,k,numqd
+                 print *,r,k,numqd,gxd(k),gyd(k),gzd(k)
                  gx1 = gxd(k)
                  gy1 = gyd(k)
                  gz1 = gzd(k)
@@ -189,6 +177,7 @@ c      COMMON /PARA1/ MUL
                  r = rand()
 				 k = int( r*float(numqu) )+1
                   if (k.gt.numqu)k=numqu
+                  print *,r,k,numqu,gxu(k),gyu(k),gzu(k)
                  gx1 = gxu(k)
                  gy1 = gyu(k)
                  gz1 = gzu(k)
