@@ -1797,13 +1797,13 @@ c**** transfer parton information to hadronization****
 			  
               ITY=ITYpar(I)
 			  
-              kjgx = gxar(I)
+              gxkj = gxar(I)
 			  
-              kjgy = gyar(I)
-              kjgz = gzar(I)		
-              print *, ixj,ity,gxkj,gykj,gzkj		  
+              gykj = gyar(I)
+              gzkj = gzar(I)		
+              print *,"before", ixj,ity,gxkj,gykj,gzkj		  
               call HadReSamp(ixj,ity)
-              print *, ixj,ity,gxkj,gykj,gzkj				  
+              print *, "after",ixj,ity,gxkj,gykj,gzkj				  
               gxar(I) = gxkj
               gyar(I)= gykj
               gzar(I) = gzkj	  
