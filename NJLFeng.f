@@ -126,11 +126,13 @@ c      COMMON /PARA1/ MUL
      &       PXd(MAXSTR1), PYd(MAXSTR1), PZd(MAXSTR1), PEd(MAXSTR1),
      &       XMd(MAXSTR1)
       COMMON /NJLMUL/ NJLMUL(MAXR)	 
-      common /quarkkj/gxkj,gykj,gzkj
+      !common /quarkkj/gxkj,gykj,gzkj
         !open (unit=99, file='zpcBW.dat', status='unknown')	  
         !open(unit=106, file='NJLEVE.dat', status='unknown')	
         !read(106,*)nevent
-		
+              open (unit=77, file='kjquark.dat', status='unknown')	
+              read(77,*)gxkj,gykj,gzkj	
+              close(77)			
               print *,"HadReSamp input:",npara0,ity,gxkj,gykj,gzkj  		
 	
        numqu = 0
@@ -186,7 +188,10 @@ c      COMMON /PARA1/ MUL
 				 
               endif
 			  
-              !if (Is.eq.1)then
+              if (Is.eq.1)then
+			  open (unit=77, file='kjquark.dat', status='unknown')	
+              write(77,*)gxkj,gykj,gzkj	
+              close(77)	
 
               !print *,"before:",gx,gy,gz               
               !gx=gx1
@@ -194,7 +199,7 @@ c      COMMON /PARA1/ MUL
               !gz=gz1
               !ftar(I)=ft
               !print *, "after:",gx,gy,gz
-              !endif
+              endif
 			  
          !print *,"hadron resample done!, events=",npara0		   
         RETURN

@@ -366,7 +366,7 @@ clin-parentString:
         COMMON /RUN/ NUM !XJ: TEST PARTICLES 
 
 	 
-      common /quarkkj/gxkj,gykj,gzkj
+      !common /quarkkj/gxkj,gykj,gzkj
 		
         SAVE   
 
@@ -1800,9 +1800,16 @@ c**** transfer parton information to hadronization****
               gxkj = gxar(I)
 			  
               gykj = gyar(I)
-              gzkj = gzar(I)		
+              gzkj = gzar(I)
+
+              open (unit=77, file='kjquark.dat', status='unknown')	
+              write(77,*)gxkj,gykj,gzkj	
+              close(77)			  
               print *,"before", ixj,ity,gxkj,gykj,gzkj		  
               call HadReSamp(ixj,ity)
+              open (unit=77, file='kjquark.dat', status='unknown')	
+              read(77,*)gxkj,gykj,gzkj	
+              close(77)				  
               print *, "after",ixj,ity,gxkj,gykj,gzkj				  
               gxar(I) = gxkj
               gyar(I)= gykj
