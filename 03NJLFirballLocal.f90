@@ -127,7 +127,7 @@
     ispin = 0                                                                               ! spin 
     ichiral = 1   ! 0 vacuum  1 chiral   2 current
     !print *, "IEM",iem
-    thd = 0.3                                                                               !time after which hadronization is allowed
+    thd = 3.0 !0.3                                                                               !time after which hadronization is allowed
 	tend =15.0 !30                                                                               !end time      
     if(ispec.eq.1)then
         open (unit=18, file='spec.dat', status='unknown')   
