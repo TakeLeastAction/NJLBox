@@ -119,7 +119,7 @@
                                         !4: until tend.										
     ievolution = 0                                                                          !1: record evolution information, 0: do not record evolution information
     icollision = 1  ! 0 no collisions
-    inewton = 0 !1  ! 0 no hamiltonian equation 
+    inewton = 1 !1  ! 0 no hamiltonian equation 
     inewtonM = 1 ! 0 no mass difference contribution
     inewtonPA = 0 ! 0 no contribution from \partial A/\partical t
     iEM = 0                                                                                  !1: including electro-magnetic force	
@@ -2296,9 +2296,13 @@
 
           write(100,2013) q(5,i,npara),q(6,i,npara),q(7,i,npara),&
           int(q(9,i,npara)),q(8,i,npara),q(1,i,npara),q(2,i,npara),q(3,i,npara), t 
-
+             if(int(qq(9,i,npara)).eq.0)then
+          write(100,2013) q(5,i,npara),q(6,i,npara),q(7,i,npara),&
+          int(q(9,i,npara)),q(8,i,npara),q(1,i,npara),q(2,i,npara),q(3,i,npara), t 
+             else		  
 		            write(120,2013) qq(5,i,npara),qq(6,i,npara),qq(7,i,npara),&
           int(qq(9,i,npara)),qq(8,i,npara),qq(1,i,npara),qq(2,i,npara),qq(3,i,npara),qq(4,i,npara)
+          endif
 	   
 	   enddo
     enddo
