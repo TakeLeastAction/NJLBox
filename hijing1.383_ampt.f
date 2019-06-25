@@ -1908,7 +1908,7 @@ cc
               GXARXJ(nattxj1,IXJ)=GXNxj(I,ixj)
               GYARXJ(nattxj1,IXJ)=GYNxj(I,ixj)
               GZARXJ(nattxj1,IXJ)=GZNxj(I,ixj)
-              FTARXJ(nattxj1,IXJ)=FTNxj(I,ixj)
+              FTARXJ(nattxj1,IXJ)=FTNxj(I,ixj)+0.01  !avoid 0 by kjsun
               ITYPARXJ(nattxj1,IXJ)=ITYPNxj(I,ixj)
               PXARXJ(nattxj1,IXJ)=PXNxj(I,ixj)
               PYARXJ(nattxj1,IXJ)=PYNxj(I,ixj)
