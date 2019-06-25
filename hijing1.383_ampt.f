@@ -1791,33 +1791,7 @@ c**** transfer parton information to hadronization****
 		   
 		   mul = njlmul(ixj)  !importrant  number of partons
            call ptoh
-         print *,"hadron resample begin, events=",ixj		   
-		    do I=1,NATT
-			
-			  
-              ITY=ITYpar(I)
-			  
-              gxkj = gxar(I)
-			  
-              gykj = gyar(I)
-              gzkj = gzar(I)
-
-              open (unit=77, file='kjquark.dat', status='unknown')	
-              write(77,*)gxkj,gykj,gzkj	
-              close(77)			  
-              print *,"before", ixj,ity,gxkj,gykj,gzkj		  
-              call HadReSamp(ixj,ity)
-              open (unit=77, file='kjquark.dat', status='unknown')	
-              read(77,*)gxkj,gykj,gzkj	
-              close(77)				  
-              print *, "after",ixj,ity,gxkj,gykj,gzkj				  
-              gxar(I) = gxkj
-              gyar(I)= gykj
-              gzar(I) = gzkj	  
-
-           enddo
-
-         print *,"hadron resample done!, events=",ixj			   
+		   
 		   
 
 		    NATTXJ(ixj) = NATT
@@ -1849,8 +1823,77 @@ clin-2/2017 this may cause no particle record in ampt.dat for the event:
 		   
 		   
 		   enddo
-		   
 
+
+
+
+c**** resample nucleons according  to delta****			
+		DO IXJ = 1,NUM
+		    NATT =  NATTXJ(ixj)
+         print *,"hadron resample begin, events=",ixj		   
+		    do I=1,NATT
+			
+			  
+              ITY=ITYparxj(I,ixj)
+			  
+              I1=I
+              ixj1 = ixj
+                 r1 = rand()
+				 ixj1 = int( r1*float(NUM) )+1
+                  if (ixj1.gt.NUM)ixj1=NUM	
+		    NATT1 =  NATTXJ(ixj1)
+			
+             if(ity.eq.2212)then	
+             ifind = 0
+             do while (ifind.eq.0)
+                 r2 = rand()
+				 I1 = int( r2*float(NATT1) )+1
+                  if (I1.gt.NATT1)I1=NATT1
+				  
+              ITY1=ITYparxj(I1,ixj1)                				  
+              if(ITY1.eq.2224)ifind=1
+          print *,"proton resample, events=",ixj,I,ixj1,I1				  
+            enddo
+            endif			
+
+             if(ity.eq.2112)then	
+             ifind = 0
+             do while (ifind.eq.0)
+                 r2 = rand()
+				 I1 = int( r2*float(NATT1) )+1
+                  if (I1.gt.NATT1)I1=NATT1
+				  
+              ITY1=ITYparxj(I1,ixj1)                				  
+              if(ITY1.eq.1114)ifind=1
+
+          print *,"neutron resample, events=",ixj,I,ixj1,I1			  
+            enddo	
+            endif				
+              !call HadronReSamp(ixj,ity,ixj1,I1)
+			  
+			  
+              !ITYparxj(I,ixj)=ITYparxj(I1,ixj1)
+              gxarxj(I,ixj)=gxarxj(I1,ixj1)
+              gyarxj(I,ixj)=gyarxj(I1,ixj1)
+              gzarxj(I,ixj)=gzarxj(I1,ixj1)
+              ftarxj(I,ixj)=ftarxj(I1,ixj1)
+              pxarxj(I,ixj)=pxarxj(I1,ixj1)
+              pyarxj(I,ixj)= pyarxj(I1,ixj1)
+              pzarxj(I,ixj)=pzarxj(I1,ixj1)
+              pearxj(I,ixj)=pearxj(I1,ixj1)
+              !xmarxj(I,ixj)=xmarxj(I1,ixj1)
+
+			  
+           enddo
+
+         print *,"hadron resample done!, events=",ixj			   
+		   
+		   
+		   
+		   enddo		   
+
+		   
+cc
 	DO IXJ = 1,NUM     !recording spectators
            do 1006 I=1,nnozpcxj(ixj)
 	          nattxj1 = NATTXJ(IXJ) + 1
@@ -7274,4 +7317,3 @@ c     &        '*     |   / /  \     /  / \_|    /   -------     *'/10X,
      &  '             Lawrence Berkeley Laboratory           '//)        
         RETURN
         END
-

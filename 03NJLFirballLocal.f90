@@ -2297,7 +2297,7 @@
           write(100,2013) q(5,i,npara),q(6,i,npara),q(7,i,npara),&
           int(q(9,i,npara)),q(8,i,npara),q(1,i,npara),q(2,i,npara),q(3,i,npara), t 
              if(int(qq(9,i,npara)).eq.0)then
-          write(100,2013) q(5,i,npara),q(6,i,npara),q(7,i,npara),&
+          write(120,2013) q(5,i,npara),q(6,i,npara),q(7,i,npara),&
           int(q(9,i,npara)),q(8,i,npara),q(1,i,npara),q(2,i,npara),q(3,i,npara), t 
              else		  
 		            write(120,2013) qq(5,i,npara),qq(6,i,npara),qq(7,i,npara),&
