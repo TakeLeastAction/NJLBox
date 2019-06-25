@@ -1887,7 +1887,7 @@ c**** resample nucleons according  to delta****
               pxarxj(I,ixj)=pxarxj(I1,ixj1)
               pyarxj(I,ixj)= pyarxj(I1,ixj1)
               pzarxj(I,ixj)=pzarxj(I1,ixj1)
-              pearxj(I,ixj)=pearxj(I1,ixj1)
+              pearxj(I,ixj)=sqrt(xmarxj(I,ixj)**2.+pxarxj(I,ixj)**2.+pyarxj(I,ixj)**2.+pzarxj(I,ixj)**2.)
               !xmarxj(I,ixj)=xmarxj(I1,ixj1)
 
 			  
