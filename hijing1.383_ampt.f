@@ -1771,6 +1771,7 @@ clin-4/30/01 convert partons to hadrons after ZPC:
 			!ENDDO
 c**** transfer parton information to hadronization****			
 		DO IXJ = 1,NUM
+         print *,"transfer parton information to hadronization:",ixj		
 			NATT=0
            EATT=0.
 		      DO I = 1, njlmul(ixj) 
@@ -1851,8 +1852,11 @@ c**** resample nucleons according  to delta****
                   if (I1.gt.NATT1)I1=NATT1
 				  
               ITY1=ITYparxj(I1,ixj1)                				  
-              if(ITY1.eq.2224)ifind=1
-          print *,"proton resample, events=",ixj,I,ixj1,I1				  
+              if(ITY1.eq.2224)then
+               ifind=1
+          print *,"proton resample, events=",ixj,I,ixj1,I1
+
+              endif		  
             enddo
             endif			
 
@@ -1864,9 +1868,12 @@ c**** resample nucleons according  to delta****
                   if (I1.gt.NATT1)I1=NATT1
 				  
               ITY1=ITYparxj(I1,ixj1)                				  
-              if(ITY1.eq.1114)ifind=1
+              if(ITY1.eq.1114)then 
+                  ifind=1
 
-          print *,"neutron resample, events=",ixj,I,ixj1,I1			  
+          print *,"neutron resample, events=",ixj,I,ixj1,I1	
+
+             endif		  
             enddo	
             endif				
               !call HadronReSamp(ixj,ity,ixj1,I1)
