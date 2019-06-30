@@ -1884,6 +1884,10 @@ c**** resample nucleons according  to delta****
               gyarxj(I,ixj)=gyarxj(I1,ixj1)
               gzarxj(I,ixj)=gzarxj(I1,ixj1)
               ftarxj(I,ixj)=ftarxj(I1,ixj1)
+              if (ftarxj(I,ixj).le.0.01)then
+               ftarxj(I,ixj)=0.01	
+               print *,"initial hadron time too small!"
+              endif			   
               pxarxj(I,ixj)=pxarxj(I1,ixj1)
               pyarxj(I,ixj)= pyarxj(I1,ixj1)
               pzarxj(I,ixj)=pzarxj(I1,ixj1)
